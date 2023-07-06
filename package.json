@@ -1,0 +1,37 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Api rest - Smart",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "db-seeds": "npx sequelize db:seed:all",
+    "db-drop": "npx sequelize db:drop",
+    "db-create": "npx sequelize db:create",
+    "server": "node server.js",
+    "build": "node server.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "author": "Quentin Vannarath",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mysql2": "^3.4.0",
+    "sequelize": "^6.32.1",
+    "sequelize-cli": "^6.6.1"
+  },
+  "devDependencies": {
+    "jest": "^29.6.0",
+    "supertest": "^6.3.3"
+  }
+}
