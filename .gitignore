@@ -94,3 +94,5 @@ web_modules/
 # Serverless Webpack directories
 .webpack/
 .vercel
+
+.vscode

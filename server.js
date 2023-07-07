@@ -3,6 +3,7 @@ const cors = require("cors");
 const errorHandler = require("./middleware/errorHandler");
 require('dotenv').config()
 
+const helmet = require('helmet');
 const app = express();
 
 const corsOptions = {
@@ -17,6 +18,12 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+app.disable("x-powered-by");
+app.use(
+  helmet({
+    xPoweredBy: false,
+  })
+);
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to smart application." });
