@@ -139,7 +139,9 @@ exports.deleteUser = async (req, res, next) => {
  */
 exports.updateUser = async (req, res, next) => {
     try {
-        if (req.body.password) req.body.password = bcrypt.hashSync(req.body.password, 8);
+        if (req.body.password) {
+            req.body.password = bcrypt.hashSync(req.body.password, 8);
+        }
 
         const user = await User.findByPk(req.params.id);
 
@@ -148,11 +150,24 @@ exports.updateUser = async (req, res, next) => {
         }
 
         await user.update(req.body);
+
+        if (req.body.roles) {
+            const roles = await Role.findAll({
+                where: {
+                    name: {
+                        [Op.or]: req.body.roles,
+                    },
+                },
+            });
+
+            await user.setRoles(roles);
+        }
+
         res.status(200).send({ message: "User updated successfully!" });
     } catch (err) {
         next(new ErrorResponse(err.message, 500));
     }
-}
+};
 
 /**
  * Retrieves the bookings associated with a user from the database.
